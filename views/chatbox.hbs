@@ -1,0 +1,44 @@
+{{#>layout}}
+  {{#*inline "content"}}
+    <div id="chatbox-container" class="chatbox-container">
+      <div id="chatbox-content" class="chatbox-content">1</div>
+    </div>
+    <button>last</button>
+    <button>next</button>
+
+    <script id="message-template" type="text/x-handlebars-template">
+      \{{#each messages}}
+        <div class="chatbox-message">\{{id}}</div>
+      \{{/each}}
+    </script>
+    <script>
+      var source   = $("#message-template").html()
+      var template = Handlebars.compile(source)
+      var context = {
+          messages: [
+            {id: 1, title: "foo"},
+            {id: 2, title: "bar"},
+            {id: 3, title: "foo"},
+            {id: 4, title: "bar"},
+            {id: 5, title: "foo"},
+            {id: 6, title: "bar"},
+            {id: 7, title: "foo"},
+            {id: 8, title: "bar"},
+            {id: 9, title: "foo"},
+            {id: 10, title: "bar"},
+//            {id: 11, title: "foo"},
+//            {id: 12, title: "foo"},
+//            {id: 13, title: "foo"},
+//            {id: 14, title: "foo"},
+//            {id: 15, title: "foo"},
+//            {id: 16, title: "foo"},
+//            {id: 17, title: "foo"},
+          ]
+      }
+      context.messages = context.messages.reverse()
+      var html    = template(context)
+      var output =  $("#chatbox-content")
+      output.html(html)
+    </script>
+  {{/inline}}
+{{/layout}}
